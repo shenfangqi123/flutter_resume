@@ -10,7 +10,10 @@ class _VerticalSwipeController {
   final VoidCallback onSwipeComplete;
 
   /// When the _swipeReleaseAnim plays, sync its value to _swipeUpAmt
-  void handleSwipeReleaseAnimTick() => swipeAmt.value = swipeReleaseAnim.value;
+  void handleSwipeReleaseAnimTick() {
+    swipeAmt.value = swipeReleaseAnim.value;
+    //print(swipeAmt.value);
+  }
   void handleTapDown() => isPointerDown.value = true;
   void handleTapCancelled() => isPointerDown.value = false;
 
@@ -32,7 +35,7 @@ class _VerticalSwipeController {
       }
     }
 
-    //print(_swipeUpAmt.value);
+    //print(swipeAmt.value);
   }
 
   /// Utility method to wrap a couple of ValueListenableBuilders and pass the values into a builder methods.

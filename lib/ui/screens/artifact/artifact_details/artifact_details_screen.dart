@@ -5,6 +5,8 @@ import 'package:wonders/ui/common/compass_divider.dart';
 import 'package:wonders/ui/common/controls/app_loading_indicator.dart';
 import 'package:wonders/ui/common/gradient_container.dart';
 import 'package:wonders/ui/common/modals/fullscreen_url_img_viewer.dart';
+import 'package:wonders/ui/common/modals/fullscreen_mp4video_viewer.dart';
+import 'package:wonders/logic/data/prentation_data.dart';
 
 part 'widgets/_content.dart';
 part 'widgets/_header.dart';
@@ -18,17 +20,19 @@ class ArtifactDetailsScreen extends StatefulWidget {
 }
 
 class _ArtifactDetailsScreenState extends State<ArtifactDetailsScreen> {
-  late final _future = metAPILogic.getArtifactByID(widget.artifactId);
+  late final _future = metAPILogic.getPresentationByID(widget.artifactId);
+
 
   @override
   Widget build(BuildContext context) {
     return ColoredBox(
       color: $styles.colors.greyStrong,
-      child: FutureBuilder<ArtifactData?>(
+      child: FutureBuilder<PresentationData?>(
         future: _future,
         builder: (_, snapshot) {
           final data = snapshot.data;
           late Widget content;
+
           if (snapshot.hasError || (snapshot.hasData && data == null)) {
             content = Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -44,7 +48,7 @@ class _ArtifactDetailsScreenState extends State<ArtifactDetailsScreen> {
                 SizedBox(
                   width: $styles.insets.xxl * 3,
                   child: Text(
-                    StringUtils.supplant($strings.artifactDetailsErrorNotFound, {'{artifactId}': widget.artifactId}),
+                    StringUtils.supplant($strings.artifactDetailsErrorNotFound.toString(), {'{artifactId}': widget.artifactId}),
                     style: $styles.text.body.copyWith(color: $styles.colors.offWhite),
                     textAlign: TextAlign.center,
                   ),
@@ -67,6 +71,7 @@ class _ArtifactDetailsScreenState extends State<ArtifactDetailsScreen> {
                 SliverToBoxAdapter(child: _Content(data: data)),
               ],
             );
+
           }
 
           return Stack(children: [

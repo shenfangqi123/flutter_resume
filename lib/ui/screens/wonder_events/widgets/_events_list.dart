@@ -1,8 +1,9 @@
 part of '../wonder_events.dart';
 
 class _EventsList extends StatefulWidget {
-  const _EventsList({Key? key, required this.data}) : super(key: key);
-  final WonderData data;
+  const _EventsList({Key? key, required this.data, required this.type}) : super(key: key);
+  final Map data;
+  final WonderType type;
 
   @override
   State<_EventsList> createState() => _EventsListState();
@@ -16,7 +17,7 @@ class _EventsListState extends State<_EventsList> {
     super.dispose();
   }
 
-  void _handleGlobalTimelinePressed() => context.push(ScreenPaths.timeline(widget.data.type));
+  void _handleGlobalTimelinePressed() => context.push(ScreenPaths.timeline(widget.type));
 
   @override
   Widget build(BuildContext context) {
@@ -71,10 +72,10 @@ class _EventsListState extends State<_EventsList> {
       );
     }
 
-    final events = widget.data.events;
+    //final events = widget.data.events;
 
     final listItems = <Widget>[];
-    for (var e in events.entries) {
+    for (var e in widget.data.entries) {
       final delay = 100.ms + (100 * listItems.length).ms;
       listItems.add(
         TimelineEventCard(year: e.key, text: e.value)
@@ -83,6 +84,7 @@ class _EventsListState extends State<_EventsList> {
             .slide(begin: Offset(0, 1), curve: Curves.easeOutBack),
       );
     }
+
     return SingleChildScrollView(
       controller: _scroller,
       child: Column(
@@ -100,17 +102,10 @@ class _EventsListState extends State<_EventsList> {
                 buildHandle(),
                 Gap($styles.insets.sm),
                 ...listItems,
-                Gap($styles.insets.lg),
-                AppBtn.from(
-                  text: $strings.eventsListButtonOpenGlobal,
-                  expand: true,
-                  onPressed: _handleGlobalTimelinePressed,
-                  semanticLabel: $strings.eventsListButtonOpenGlobal,
-                ),
                 Gap($styles.insets.xl),
                 CompassDivider(isExpanded: true),
-                Gap($styles.insets.md),
-                HiddenCollectible(widget.data.type, index: 2, size: 150),
+                //Gap($styles.insets.md),
+                //HiddenCollectible(widget.type, index: 2, size: 150),
                 Gap(150),
               ],
             ),

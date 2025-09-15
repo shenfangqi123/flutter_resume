@@ -102,6 +102,7 @@ class _WonderEditorialScreenState extends State<WonderEditorialScreen> {
                 ),
               ),
 
+
               /// Scrolling content - Includes an invisible gap at the top, and then scrolls over the illustration
               CustomScrollView(
                 primary: false,
@@ -167,7 +168,8 @@ class _WonderEditorialScreenState extends State<WonderEditorialScreen> {
                       child: child,
                     );
                   },
-                  child: BackBtn(icon: AppIcons.north).safe()),
+                  child: BackBtn(icon: AppIcons.north).safe()
+              ),
             ],
           ),
         ),

@@ -79,8 +79,8 @@ class HomeMenu extends StatelessWidget {
                   Spacer(flex: 3),
                   _buildIconGrid(context)
                       .animate()
-                      .fade(duration: $styles.times.fast)
-                      .scale(begin: .8, curve: Curves.easeOut),
+                      .fade(duration: $styles.times.fast),
+                      //.scale(begin: .8, curve: Curves.easeOut),
                   Spacer(flex: 2),
                   _buildBottomBtns(context),
                   Gap($styles.insets.xl),

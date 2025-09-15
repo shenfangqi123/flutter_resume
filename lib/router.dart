@@ -8,6 +8,10 @@ import 'package:wonders/ui/screens/artifact/artifact_details/artifact_details_sc
 import 'package:wonders/ui/screens/artifact/artifact_search/artifact_search_screen.dart';
 import 'package:wonders/ui/screens/collection/collection_screen.dart';
 import 'package:wonders/ui/screens/home/wonders_home_screen.dart';
+import 'package:wonders/ui/screens/login/wonders_login_screen.dart';
+import 'package:wonders/ui/screens/upload/wonders_entry_screen.dart';
+import 'package:wonders/ui/screens/chat/wonders_chat_screen.dart';
+import 'package:wonders/ui/screens/chat2/wonders_chat2_screen.dart';
 import 'package:wonders/ui/screens/intro/intro_screen.dart';
 import 'package:wonders/ui/screens/timeline/timeline_screen.dart';
 import 'package:wonders/ui/screens/wallpaper_photo/wallpaper_photo_screen.dart';
@@ -18,7 +22,11 @@ class ScreenPaths {
   static String splash = '/';
   static String intro = '/welcome';
   static String home = '/home';
+  static String login = '/login';
   static String settings = '/settings';
+  static String upload = '/upload';
+  static String chat = '/chat';
+  static String chat2 = '/chat2';
   static String wonderDetails(WonderType type, {int tabIndex = 0}) => '/wonder/${type.name}?t=$tabIndex';
   static String video(String id) => '/video/$id';
   static String highlights(WonderType type) => '/highlights/${type.name}';
@@ -33,41 +41,52 @@ class ScreenPaths {
 /// Routing table, matches string paths to UI Screens
 final appRouter = GoRouter(
   redirect: _handleRedirect,
-  navigatorBuilder: (_, __, child) => WondersAppScaffold(child: child),
+  //navigatorBuilder: (_, __, child) => WondersAppScaffold(child: child),
+
   routes: [
     AppRoute(ScreenPaths.splash, (_) => Container(color: $styles.colors.greyStrong)), // This will be hidden
     AppRoute(ScreenPaths.home, (_) => HomeScreen()),
+    AppRoute(ScreenPaths.login, (_) => LoginScreen()),
     AppRoute(ScreenPaths.intro, (_) => IntroScreen()),
-    AppRoute('/wonder/:type', (s) {
-      int tab = int.tryParse(s.queryParams['t'] ?? '') ?? 0;
-      return WonderDetailsScreen(
-        type: _parseWonderType(s.params['type']!),
-        initialTabIndex: tab,
-      );
-    }, useFade: true),
-    AppRoute('/timeline', (s) {
-      return TimelineScreen(type: _tryParseWonderType(s.queryParams['type']!));
-    }),
-    AppRoute('/video/:id', (s) {
-      return FullscreenVideoPage(id: s.params['id']!);
-    }),
-    AppRoute('/highlights/:type', (s) {
-      return ArtifactCarouselScreen(type: _parseWonderType(s.params['type']!));
-    }),
-    AppRoute('/search/:type', (s) {
-      return ArtifactSearchScreen(type: _parseWonderType(s.params['type']!));
-    }),
-    AppRoute('/artifact/:id', (s) {
-      return ArtifactDetailsScreen(artifactId: s.params['id']!);
-    }),
+    AppRoute(ScreenPaths.upload, (_) => UploadScreen()),
+    AppRoute(ScreenPaths.chat, (_) => ChatScreen()),
+    AppRoute(ScreenPaths.chat2, (_) => Chat2Screen()),
+
+    /*
     AppRoute('/collection', (s) {
       return CollectionScreen(fromId: s.queryParams['id'] ?? '');
     }),
     AppRoute('/maps/:type', (s) {
-      return FullscreenMapsViewer(type: _parseWonderType(s.params['type']!));
+      return FullscreenMapsViewer(type: _parseWonderType(s.pathParameters['type']!));
     }),
     AppRoute('/wallpaperPhoto/:type', (s) {
-      return WallpaperPhotoScreen(type: _parseWonderType(s.params['type']!));
+      return WallpaperPhotoScreen(type: _parseWonderType(s.pathParameters['type']!));
+    }),
+    AppRoute('/timeline', (s) {
+      return TimelineScreen();
+    }),
+     */
+
+    AppRoute('/wonder/:type', (s) {
+      //int tab = int.tryParse(s.queryParams['t'] ?? '') ?? 0;
+      return WonderDetailsScreen(
+        type: _parseWonderType(s.pathParameters['type']!),
+        initialTabIndex: 0,
+      );
+    }, useFade: true),
+
+    AppRoute('/video/:id', (s) {
+      return FullscreenVideoPage(id: s.pathParameters['id']!);
+    }),
+
+    AppRoute('/highlights/:type', (s) {
+      return ArtifactCarouselScreen(type: _parseWonderType(s.pathParameters['type']!));
+    }),
+    AppRoute('/search/:type', (s) {
+      return ArtifactSearchScreen(type: _parseWonderType(s.pathParameters['type']!));
+    }),
+    AppRoute('/artifact/:id', (s) {
+      return ArtifactDetailsScreen(artifactId: s.pathParameters['id']!);
     }),
   ],
 );
@@ -99,12 +118,12 @@ class AppRoute extends GoRoute {
   final bool useFade;
 }
 
-String? _handleRedirect(GoRouterState state) {
+String? _handleRedirect(BuildContext context, GoRouterState state) {
   // Prevent anyone from navigating away from `/` if app is starting up.
-  if (!appLogic.isBootstrapComplete && state.location != ScreenPaths.splash) {
+  if (!appLogic.isBootstrapComplete && state.uri.path != ScreenPaths.splash) {
     return ScreenPaths.splash;
   }
-  debugPrint('Navigate to: ${state.location}');
+  debugPrint('Navigate to: ${state.uri.toString()}');
   return null; // do nothing
 }
 

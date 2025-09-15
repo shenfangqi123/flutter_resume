@@ -8,12 +8,15 @@ import 'package:wonders/logic/data/wonders_data/machu_picchu_data.dart';
 import 'package:wonders/logic/data/wonders_data/petra_data.dart';
 import 'package:wonders/logic/data/wonders_data/pyramids_giza_data.dart';
 import 'package:wonders/logic/data/wonders_data/taj_mahal_data.dart';
+import 'package:wonders/logic/data/wonders_data/search/search_data.dart';
+
+import 'dart:convert';
 
 class WondersLogic {
   List<WonderData> all = [];
 
-  final int timelineStartYear = -3000;
-  final int timelineEndYear = 2200;
+  final int timelineStartYear = 2000;
+  final int timelineEndYear = 2030;
 
   WonderData getData(WonderType value) {
     WonderData? result = all.firstWhereOrNull((w) => w.type == value);

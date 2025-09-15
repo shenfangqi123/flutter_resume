@@ -11,10 +11,13 @@ class FullscreenVideoPage extends StatefulWidget {
 }
 
 class _FullscreenVideoPageState extends State<FullscreenVideoPage> {
+/*
   late final _controller = YoutubePlayerController(
     initialVideoId: widget.id,
     params: const YoutubePlayerParams(autoPlay: true, startAt: Duration(seconds: 1)),
   )..play();
+
+ */
 
   @override
   void initState() {
@@ -41,7 +44,7 @@ class _FullscreenVideoPageState extends State<FullscreenVideoPage> {
               child: Stack(
                 children: [
                   const Center(child: AppLoadingIndicator()),
-                  YoutubePlayerIFrame(controller: _controller, aspectRatio: aspect),
+                  //YoutubePlayerIFrame(controller: _controller, aspectRatio: aspect),
                 ],
               ),
             ),

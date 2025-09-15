@@ -70,3 +70,34 @@ extension WonderAssetExtensions on WonderType {
   String get photo4 => '$assetPath/photo-4.jpg';
   String get flattened => '$assetPath/flattened.jpg';
 }
+
+/// For wonder specific assets, add an extension to [ResumeType] for easy lookup
+extension ResumeAssetExtensions on ResumeType {
+  String get assetPath {
+    switch (this) {
+      case ResumeType.changjiang:
+        return '${ImagePaths.root}/changjiang';
+      case ResumeType.raytec:
+        return '${ImagePaths.root}/raytec';
+      case ResumeType.anshex:
+        return '${ImagePaths.root}/anshex';
+      case ResumeType.weic1:
+        return '${ImagePaths.root}/weic';
+      case ResumeType.weic2:
+        return '${ImagePaths.root}/weic';
+      case ResumeType.cmn:
+        return '${ImagePaths.root}/cmn';
+      case ResumeType.self:
+        return '${ImagePaths.root}/self';
+      case ResumeType.kaisei:
+        return '${ImagePaths.root}/kaisei';
+    }
+  }
+
+  String get homeBtn => '$assetPath/wonder-button.png';
+  String get photo1 => '$assetPath/photo-1.jpg';
+  String get photo2 => '$assetPath/photo-2.jpg';
+  String get photo3 => '$assetPath/photo-3.jpg';
+  String get photo4 => '$assetPath/photo-4.jpg';
+  String get flattened => '$assetPath/flattened.jpg';
+}

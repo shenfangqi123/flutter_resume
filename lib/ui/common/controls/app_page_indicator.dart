@@ -53,7 +53,7 @@ class _AppPageIndicatorState extends State<AppPageIndicator> {
                   liveRegion: true,
                   focusable: false,
                   readOnly: true,
-                  label: StringUtils.supplant($strings.appPageSemanticSwipe, {
+                  label: StringUtils.supplant($strings.appPageSemanticSwipe.toString(), {
                     '{pageTitle}': widget.semanticPageTitle,
                     '{count}': (_controllerPage % (widget.count) + 1).toString(),
                     '{total}': widget.count.toString(),

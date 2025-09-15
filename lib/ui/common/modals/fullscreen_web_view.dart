@@ -11,7 +11,7 @@ class FullscreenWebView extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(),
         body: InAppWebView(
-          initialUrlRequest: URLRequest(url: Uri.parse(url)),
+          initialUrlRequest: URLRequest(url: WebUri(url)),
         ),
       ),
     );

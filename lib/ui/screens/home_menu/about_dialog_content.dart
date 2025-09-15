@@ -48,27 +48,27 @@ class AboutDialogContent extends StatelessWidget {
             style: $styles.text.bodySmall.copyWith(color: Colors.black, fontSize: fontSize),
             children: [
               ...buildSpan($strings.homeMenuAboutWonderous),
-              ...buildSpan($strings.homeMenuAboutBuilt, linkSupplants: {
+              ...buildSpan($strings.homeMenuAboutBuilt.toString(), linkSupplants: {
                 '{flutterUrl}': [$strings.homeMenuAboutFlutter, 'https://flutter.dev'],
                 '{gskinnerUrl}': [$strings.homeMenuAboutGskinner, 'https://gskinner.com/flutter'],
               }),
               ...buildSpan('\n\n'),
-              ...buildSpan($strings.homeMenuAboutLearn, linkSupplants: {
+              ...buildSpan($strings.homeMenuAboutLearn.toString(), linkSupplants: {
                 '{wonderousUrl}': [$strings.homeMenuAboutApp, 'https://wonderous.app'],
               }),
               ...buildSpan('\n\n'),
-              ...buildSpan($strings.homeMenuAboutSource, linkSupplants: {
+              ...buildSpan($strings.homeMenuAboutSource.toString(), linkSupplants: {
                 '{githubUrl}': [$strings.homeMenuAboutRepo, 'https://github.com/gskinnerTeam/flutter-wonderous-app'],
               }),
               ...buildSpan('\n\n'),
-              ...buildSpan($strings.homeMenuAboutPublic, linkSupplants: {
+              ...buildSpan($strings.homeMenuAboutPublic.toString(), linkSupplants: {
                 '{metUrl}': [
                   $strings.homeMenuAboutMet,
                   'https://www.metmuseum.org/about-the-met/policies-and-documents/open-access'
                 ],
               }),
               ...buildSpan('\n\n'),
-              ...buildSpan($strings.homeMenuAboutPhotography, linkSupplants: {
+              ...buildSpan($strings.homeMenuAboutPhotography.toString(), linkSupplants: {
                 '{unsplashUrl}': [$strings.homeMenuAboutUnsplash, 'https://unsplash.com/@gskinner/collections'],
               }),
             ],

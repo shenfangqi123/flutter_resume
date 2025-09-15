@@ -1,8 +1,8 @@
 part of '../artifact_details_screen.dart';
 
 class _Header extends StatelessWidget {
-  const _Header({Key? key, required this.data}) : super(key: key);
-  final ArtifactData data;
+  _Header({Key? key, required this.data}) : super(key: key);
+  final PresentationData data;
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +28,9 @@ class _Header extends StatelessWidget {
               bottom: false,
               minimum: EdgeInsets.symmetric(vertical: $styles.insets.sm),
               child: Hero(
-                tag: data.image,
+                tag: data.imageUrl,
                 child: AppImage(
-                  image: NetworkImage(data.image),
+                  image: NetworkImage(data.imageUrl),
                   fit: BoxFit.contain,
                   distractor: true,
                   scale: FullscreenUrlImgViewer.imageScale, // so the image isn't reloaded
@@ -44,6 +44,11 @@ class _Header extends StatelessWidget {
   }
 
   void _handleImagePressed(BuildContext context) {
-    appLogic.showFullscreenDialogRoute(context, FullscreenUrlImgViewer(urls: [data.image]));
+    if(data.type == "video") {
+      appLogic.showFullscreenDialogRoute(context, FullscreenVideoPage(videoUrl: data.videoUrl, aspectRatio: data.aspectRatio));
+    }
+    else if(data.type == "image") {
+      appLogic.showFullscreenDialogRoute(context, FullscreenUrlImgViewer(urls: [data.imageUrl]));
+    }
   }
 }

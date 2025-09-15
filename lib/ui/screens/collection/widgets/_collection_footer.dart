@@ -41,7 +41,7 @@ class _CollectionFooter extends StatelessWidget {
     return Row(children: [
       Text(
         StringUtils.supplant(
-          $strings.collectionLabelDiscovered,
+          $strings.collectionLabelDiscovered.toString(),
           {'{percentage}': (count / total * 100).round().toString()},
         ),
         style: $styles.text.body.copyWith(color: $styles.colors.accent1),
@@ -49,7 +49,7 @@ class _CollectionFooter extends StatelessWidget {
       Spacer(),
       Text(
         StringUtils.supplant(
-          $strings.collectionLabelCount,
+          $strings.collectionLabelCount.toString(),
           {'{count}': count.toString(), '{total}': total.toString()},
         ),
         style: $styles.text.body.copyWith(color: $styles.colors.offWhite),

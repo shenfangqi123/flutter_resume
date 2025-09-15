@@ -87,6 +87,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   void _showDetailsPage() async {
     _swipeOverride = _swipeController.swipeAmt.value;
     context.push(ScreenPaths.wonderDetails(currentWonder.type));
+    debugPrint(ScreenPaths.wonderDetails(currentWonder.type));
     await Future.delayed(100.ms);
     _swipeOverride = null;
     _fadeInOnNextBuild = true;
@@ -260,7 +261,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                             child: AnimatedOpacity(
                               opacity: _isMenuOpen ? 0 : 1,
                               duration: $styles.times.fast,
-                              child: WonderTitleText(currentWonder, enableShadows: true),
+                              child: WonderTitleText("ttt3", enableShadows: true),
                             ),
                           ),
                           Gap($styles.insets.md),

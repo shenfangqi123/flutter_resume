@@ -8,12 +8,10 @@ class _ScrollingViewport extends StatefulWidget {
     required this.scroller,
     required this.minSize,
     required this.maxSize,
-    required this.selectedWonder,
   }) : super(key: key);
   final double minSize;
   final double maxSize;
   final ScrollController scroller;
-  final WonderType? selectedWonder;
   final void Function(_ScrollingViewportController controller)? onInit;
 
   @override
@@ -39,7 +37,7 @@ class _ScalingViewportState extends State<_ScrollingViewport> {
 
   void _handleEventMarkerChanged(TimelineEvent? event) {
     _currentEventMarker.value = event;
-    AppHaptics.selectionClick();
+    //AppHaptics.selectionClick();
   }
 
   @override
@@ -68,7 +66,7 @@ class _ScalingViewportState extends State<_ScrollingViewport> {
                   Gap($styles.insets.xs),
 
                   /// Era Text (classical, modern etc)
-                  _buildAnimatedEraText(context),
+                  //_buildAnimatedEraText(context),
                   Gap($styles.insets.xs),
                 ],
               ),
@@ -79,7 +77,8 @@ class _ScalingViewportState extends State<_ScrollingViewport> {
                 child: AnimatedBuilder(
                   animation: controller.scroller,
                   builder: (_, __) {
-                    return _DashedDividerWithYear(controller.calculateYearFromScrollPos());
+                    //print(controller.calculateYearFromScrollPos());
+                    return _DashedDividerWithYear(controller.calculateYearFromScrollPos(), constraints.maxWidth);
                   },
                 ),
               ),
@@ -110,15 +109,15 @@ class _ScalingViewportState extends State<_ScrollingViewport> {
   Widget _buildScrollingArea(double vtPadding, double size, BuildContext context, BoxConstraints constraints) {
     // Builds a TimelineSection, and passes it the currently selected yr based on scroll position.
     // Rebuilds when timeline is scrolled.
-    Widget buildTimelineSection(WonderData data) {
+    //Widget buildTimelineSection(WonderData data) {
+    Widget buildTimelineSection(ResumeData data) {
       return ClipRRect(
         borderRadius: BorderRadius.circular(99),
         child: AnimatedBuilder(
           animation: controller.scroller,
           builder: (_, __) => TimelineSection(
             data,
-            controller.calculateYearFromScrollPos(),
-            selectedWonder: widget.selectedWonder,
+            controller.calculateYearFromScrollPos()
           ),
         ),
       );
@@ -136,7 +135,7 @@ class _ScalingViewportState extends State<_ScrollingViewport> {
             child: Stack(
               children: [
                 /// Year Markers
-                _YearMarkers(),
+                //_YearMarkers(),
 
                 /// individual timeline sections
                 Positioned.fill(
@@ -147,7 +146,10 @@ class _ScalingViewportState extends State<_ScrollingViewport> {
                         axis: Axis.vertical,
                         crossAxisGap: max(6, (constraints.maxWidth - (120 * 3)) / 2),
                         minSize: _minTimelineSize,
-                        timelineBuilder: (_, data, __) => buildTimelineSection(data)),
+                        timelineBuilder: (context, data, isSelected) {
+                          return buildTimelineSection(data);
+                        },
+                    ),
                   ),
                 ),
 
@@ -176,6 +178,7 @@ class _ScalingViewportState extends State<_ScrollingViewport> {
             builder: (_, data, __) {
               return _EventPopups(currentEvent: data);
             })
+
       ],
     );
   }

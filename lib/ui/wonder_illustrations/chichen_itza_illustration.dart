@@ -58,6 +58,7 @@ class ChichenItzaIllustration extends StatelessWidget {
           ),
         ),
       ),
+
     ];
   }
 
@@ -66,8 +67,26 @@ class ChichenItzaIllustration extends StatelessWidget {
     return [
       Stack(
         children: [
+
           Transform.scale(
             scale: 1 + config.zoom * .2,
+            child: FractionalTranslation(
+              translation: Offset(0, -.5 * anim.value),
+              child: WonderHero(
+                config,
+                'great-wall-sun',
+                child: Image.asset(
+                  '$assetPath/sun.png',
+                  cacheWidth: context.widthPx.round() * 2,
+                  width: config.shortMode ? 100 : 150,
+                  opacity: anim,
+                ),
+              ),
+            ),
+          ),
+
+          Transform.scale(
+            scale: 1 + config.zoom * .5,
             child: FractionalTranslation(
               translation: Offset(-.2 * (1 - curvedAnim), 0),
               child: BottomLeft(
@@ -81,6 +100,7 @@ class ChichenItzaIllustration extends StatelessWidget {
               ),
             ),
           ),
+
           Transform.scale(
             scale: 1 + config.zoom * .1,
             child: FractionalTranslation(
@@ -96,6 +116,7 @@ class ChichenItzaIllustration extends StatelessWidget {
               ),
             ),
           ),
+
           Transform.scale(
             scale: 1 + config.zoom * .15,
             child: FractionalTranslation(
@@ -111,6 +132,7 @@ class ChichenItzaIllustration extends StatelessWidget {
               ),
             ),
           ),
+
           Transform.scale(
             scale: 1 + config.zoom * .3,
             child: FractionalTranslation(

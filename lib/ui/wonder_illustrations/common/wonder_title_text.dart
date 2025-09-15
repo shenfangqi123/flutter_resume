@@ -7,8 +7,8 @@ import 'package:wonders/logic/data/wonder_data.dart';
 /// - of/the should be down-sized
 /// Accomplished using a set of TextSpans, and a white list of 'small words'
 class WonderTitleText extends StatelessWidget {
-  const WonderTitleText(this.data, {Key? key, this.enableShadows = false, this.enableHero = true}) : super(key: key);
-  final WonderData data;
+  const WonderTitleText(this.headText, {Key? key, this.enableShadows = false, this.enableHero = true}) : super(key: key);
+  final String headText;
   final bool enableShadows;
   final bool enableHero;
   @override
@@ -16,13 +16,11 @@ class WonderTitleText extends StatelessWidget {
     var textStyle = $styles.text.wonderTitle.copyWith(
       color: $styles.colors.offWhite,
     );
-    bool smallText = [WonderType.christRedeemer, WonderType.colosseum].contains(data.type);
-    if (smallText) {
-      textStyle = textStyle.copyWith(fontSize: 56);
-    }
+
+    textStyle = textStyle.copyWith(fontSize: 26);
 
     // First, get a list like: ['the\n', 'great wall']
-    final title = data.title.toLowerCase();
+    final title = headText.toLowerCase();
     // Split on spaces, later, add either a linebreak or a space back in.
     List<String> pieces = title.split(' ');
     // TextSpan builder, figures out whether to use small text, and adds linebreak or space (or nothing).

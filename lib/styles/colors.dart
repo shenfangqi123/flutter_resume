@@ -2,6 +2,7 @@ import 'package:wonders/common_libs.dart';
 import 'package:wonders/logic/common/color_utils.dart';
 
 export 'wonders_color_extensions.dart';
+export 'resume_color_extensions.dart';
 
 class AppColors {
   /// Common

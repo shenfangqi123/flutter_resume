@@ -1,5 +1,7 @@
+import 'package:wonders/common_libs.dart';
 import 'package:unsplash_client/unsplash_client.dart';
 import 'package:wonders/logic/data/unsplash_photo_data.dart';
+import 'dart:convert';
 
 /// Note: This service is no-longer used in the production app, but exist to enable development tools like [UnsplashDownloadService]
 String unsplashAccessKey = 'dxqHsX7IOURA5hfh0fuhL-cuX6q2-5DqghC77mnmrAU';
@@ -29,5 +31,17 @@ class UnsplashService {
       throw ('Photo did not load. statusCode=${photo.statusCode}');
     }
     return UnsplashPhotoData(id: id, url: '${data.urls.raw}');
+  }
+
+  Future<List<String>?> loadResumeSplashInfo() async {
+    final jsonString = await rootBundle.loadString('assets/data/resume_unsplash.json');
+    final jsonData = jsonDecode(jsonString);
+
+    List<String> imagePathList = [];
+    for(var item in jsonData['items']) {
+      imagePathList.add(item['imagePath']);
+    }
+
+    return imagePathList;
   }
 }

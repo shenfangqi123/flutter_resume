@@ -31,7 +31,7 @@ class _FullscreenUrlImgViewerState extends State<FullscreenUrlImgViewer> {
       builder: (_, __) {
         final bool enableSwipe = !_isZoomed.value && widget.urls.length > 1;
         return PageView.builder(
-          physics: enableSwipe ? PageScrollPhysics() : NeverScrollableScrollPhysics(),
+          //physics: enableSwipe ? PageScrollPhysics() : NeverScrollableScrollPhysics(),
           controller: _controller,
           itemCount: widget.urls.length,
           itemBuilder: (_, index) => _Viewer(widget.urls[index], _isZoomed),
@@ -83,6 +83,7 @@ class _ViewerState extends State<_Viewer> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.url);
     return GestureDetector(
       onDoubleTap: _handleDoubleTap,
       child: InteractiveViewer(

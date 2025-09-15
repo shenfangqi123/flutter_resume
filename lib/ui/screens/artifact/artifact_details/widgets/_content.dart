@@ -2,7 +2,7 @@ part of '../artifact_details_screen.dart';
 
 class _Content extends StatelessWidget {
   const _Content({Key? key, required this.data}) : super(key: key);
-  final ArtifactData data;
+  final PresentationData data;
 
   @override
   Widget build(BuildContext context) {
@@ -11,13 +11,6 @@ class _Content extends StatelessWidget {
       child: Column(
         children: [
           Gap($styles.insets.xl),
-          if (data.culture.isNotEmpty) ...[
-            Text(
-              data.culture.toUpperCase(),
-              style: $styles.text.titleFont.copyWith(color: $styles.colors.accent1),
-            ).animate().fade(delay: 150.ms, duration: 600.ms),
-            Gap($styles.insets.xs),
-          ],
           Semantics(
             header: true,
             child: Text(
@@ -40,11 +33,9 @@ class _Content extends StatelessWidget {
             children: [
               ...[
                 _InfoRow($strings.artifactDetailsLabelDate, data.date),
-                _InfoRow($strings.artifactDetailsLabelPeriod, data.period),
-                _InfoRow($strings.artifactDetailsLabelGeography, data.country),
-                _InfoRow($strings.artifactDetailsLabelMedium, data.medium),
-                _InfoRow($strings.artifactDetailsLabelDimension, data.dimension),
-                _InfoRow($strings.artifactDetailsLabelClassification, data.classification),
+                //_InfoRow($strings.artifactDetailsLabelGeography, data.country),
+                _InfoRow('技術分野', data.keywords),
+                _InfoFullRow(data.content),
               ]
                   .animate(interval: 100.ms)
                   .fade(delay: 600.ms, duration: $styles.times.med)
@@ -83,6 +74,32 @@ class _InfoRow extends StatelessWidget {
                 style: $styles.text.titleFont.copyWith(color: $styles.colors.accent2),
               ),
             ),
+            Expanded(
+              child: Text(
+                value.isEmpty ? '--' : value,
+                style: $styles.text.body.copyWith(color: $styles.colors.offWhite),
+              ),
+            ),
+          ]),
+        ),
+      ),
+    );
+  }
+}
+
+
+class _InfoFullRow extends StatelessWidget {
+  const _InfoFullRow(this.value, {Key? key}) : super(key: key);
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return ExcludeSemantics(
+      excluding: value.isEmpty,
+      child: MergeSemantics(
+        child: Padding(
+          padding: EdgeInsets.only(bottom: $styles.insets.sm),
+          child: Row(children: [
             Expanded(
               child: Text(
                 value.isEmpty ? '--' : value,

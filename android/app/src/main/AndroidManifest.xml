@@ -4,6 +4,7 @@
         android:label="Wonderous"
         android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/ic_launcher"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round">
 
        <meta-data android:name="com.google.android.geo.API_KEY"
@@ -36,4 +37,6 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 </manifest>

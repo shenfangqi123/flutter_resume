@@ -10,7 +10,8 @@ import 'package:wonders/ui/common/hidden_collectible.dart';
 import 'package:wonders/ui/common/modals/fullscreen_url_img_viewer.dart';
 import 'package:wonders/ui/common/unsplash_photo.dart';
 import 'package:wonders/ui/common/utils/app_haptics.dart';
-
+import 'package:wonders/ui/common/modals/fullscreen_url_img_viewer.dart';
+import 'package:wonders/ui/common/modals/fullscreen_mp4video_viewer.dart';
 part 'widgets/_animated_cutout_overlay.dart';
 
 class PhotoGallery extends StatefulWidget {
@@ -42,7 +43,12 @@ class _PhotoGalleryState extends State<PhotoGallery> {
   }
 
   Future<void> _initPhotoIds() async {
-    var ids = unsplashLogic.getCollectionPhotos(widget.collectionId);
+    //var ids = unsplashLogic.getCollectionPhotos(widget.collectionId);
+
+    var ids = await unsplashLogic.getResumeCollectionPhotos();
+    print("--------");
+    print(ids);
+
     if (ids != null && ids.isNotEmpty) {
       // Ensure we have enough images to fill the grid, repeat if necessary
       while (ids.length < _imgCount) {
@@ -112,8 +118,9 @@ class _PhotoGalleryState extends State<PhotoGallery> {
         context,
         CupertinoPageRoute(builder: (_) {
           final urls = _photoIds.value.map((e) {
-            return UnsplashPhotoData.getSelfHostedUrl(e, UnsplashPhotoSize.med);
+            return UnsplashPhotoData.getSplashHostedUrl(e, UnsplashPhotoSize.med);
           }).toList();
+
           return FullscreenUrlImgViewer(urls: urls, index: _index);
         }),
       );
@@ -198,11 +205,11 @@ class _PhotoGalleryState extends State<PhotoGallery> {
             semanticLbl = $strings.collectibleItemSemanticCollectible;
           } else {
             semanticLbl = !selected
-                ? StringUtils.supplant($strings.photoGallerySemanticFocus, {
+                ? StringUtils.supplant($strings.photoGallerySemanticFocus.toString(), {
                     '{photoIndex}': (index + 1).toString(),
                     '{photoTotal}': _imgCount.toString(),
                   })
-                : StringUtils.supplant($strings.photoGallerySemanticFullscreen, {
+                : StringUtils.supplant($strings.photoGallerySemanticFullscreen.toString(), {
                     '{photoIndex}': (index + 1).toString(),
                     '{photoTotal}': _imgCount.toString(),
                   });
@@ -212,17 +219,15 @@ class _PhotoGalleryState extends State<PhotoGallery> {
               focused: selected,
               image: !_checkCollectibleIndex(index),
               liveRegion: selected,
-              onIncrease: () => _handleImageTapped(_index + 1),
-              onDecrease: () => _handleImageTapped(_index - 1),
+              //onIncrease: () => _handleImageTapped(_index + 1),
+              //onDecrease: () => _handleImageTapped(_index - 1),
               child: AppBtn.basic(
                 semanticLabel: semanticLbl,
                 onPressed: () {
                   if (_checkCollectibleIndex(index) && selected) return;
                   _handleImageTapped(index);
                 },
-                child: _checkCollectibleIndex(index)
-                    ? HiddenCollectible(widget.wonderType, index: 1, size: 100)
-                    : ClipRRect(
+                child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: SizedBox(
                           width: imgSize.width,

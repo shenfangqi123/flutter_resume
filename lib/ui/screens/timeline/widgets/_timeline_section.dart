@@ -1,14 +1,15 @@
 part of '../timeline_screen.dart';
 
 class TimelineSection extends StatelessWidget {
-  const TimelineSection(this.data, this.selectedYr, {Key? key, required this.selectedWonder}) : super(key: key);
-  final WonderData data;
+  const TimelineSection(this.data, this.selectedYr, {Key? key}) : super(key: key);
+  //final WonderData data;
+  final ResumeData data;
   final int selectedYr;
-  final WonderType? selectedWonder;
 
   @override
   Widget build(BuildContext context) {
-    bool isSelected = selectedWonder == data.type;
+    bool isSelected = selectedYr < data.endYr && selectedYr >= data.startYr;
+
     // get a fraction from 0 - 1 based on selected yr and start/end yr of the wonder
     // 500, 250, 750
     int startYr = data.startYr, endYr = data.endYr;
@@ -16,7 +17,7 @@ class TimelineSection extends StatelessWidget {
     fraction = fraction.clamp(0, 1);
 
     return Semantics(
-      label: '${data.title}, ${StringUtils.supplant($strings.timelineSemanticDate, {
+      label: '${data.title}, ${StringUtils.supplant($strings.timelineSemanticDate.toString(), {
             '{fromDate}': StringUtils.formatYr(data.startYr),
             '{endDate}': StringUtils.formatYr(data.endYr)
           })}',
@@ -41,6 +42,12 @@ class TimelineSection extends StatelessWidget {
 
   Container _buildWonderImage() {
     return Container(
+        height: 160,
+        child: Image.asset(data.type.flattened)
+    );
+
+    /*
+    return Container(
       height: 160,
       decoration: BoxDecoration(
         color: data.type.bgColor,
@@ -51,5 +58,6 @@ class TimelineSection extends StatelessWidget {
         ),
       ),
     );
+     */
   }
 }

@@ -1,8 +1,7 @@
 part of '../wonder_events.dart';
 
 class _TopContent extends StatelessWidget {
-  const _TopContent({Key? key, required this.data}) : super(key: key);
-  final WonderData data;
+  const _TopContent({Key? key}) : super(key: key);
 
   Color _fixLuminence(Color color, [double luminence = 0.35]) {
     double d = luminence - color.computeLuminance();
@@ -31,29 +30,12 @@ class _TopContent extends StatelessWidget {
 
                   /// Title text
                   BottomCenter(
-                    child: WonderTitleText(data, enableHero: false),
+                    child: WonderTitleText("イベント", enableHero: false),
                   )
                 ]),
               ),
 
-              /// Bottom timeline
-              ExcludeSemantics(
-                child: SizedBox(
-                  height: 50,
-                  child: WondersTimelineBuilder(
-                      selectedWonders: [data.type],
-                      timelineBuilder: (_, data, isSelected) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            color: isSelected ? _fixLuminence(data.type.fgColor) : Colors.transparent,
-                            border: Border.all(color: $styles.colors.greyMedium),
-                            borderRadius: BorderRadius.circular($styles.corners.md),
-                          ),
-                        );
-                      }),
-                ),
-              ),
-              _buildEraTextRow(context)
+              //_buildEraTextRow(context)
             ],
           ),
         ),
@@ -69,7 +51,7 @@ class _TopContent extends StatelessWidget {
           ClipPath(
             clipper: CurvedTopClipper(),
             child: Image.asset(
-              data.type.flattened,
+              'assets/images/chichen_itza/flattened.jpg',
               width: 200,
               fit: BoxFit.cover,
               alignment: Alignment(0, -.5),
@@ -94,18 +76,7 @@ class _TopContent extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(
-          StringUtils.supplant(
-            $strings.titleLabelDate,
-            {
-              '{fromDate}': StringUtils.formatYr(data.startYr),
-              '{endDate}': StringUtils.formatYr(data.endYr),
-            },
-          ),
-          style: textStyle,
-        ),
         _buildDot(context),
-        Text(StringUtils.getEra(data.startYr), style: textStyle),
       ],
     ).animate().fade(delay: $styles.times.pageTransition);
   }

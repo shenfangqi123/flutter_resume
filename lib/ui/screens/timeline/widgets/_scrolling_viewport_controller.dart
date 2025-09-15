@@ -16,6 +16,7 @@ class _ScrollingViewportController extends ChangeNotifier {
   void init() {
     scheduleMicrotask(() {
       setZoom(.5);
+      /*
       final w = widget.selectedWonder;
       if (w != null) {
         final data = wondersLogic.getData(w);
@@ -23,6 +24,7 @@ class _ScrollingViewportController extends ChangeNotifier {
         scroller.jumpTo(pos - 200);
         scroller.animateTo(pos, duration: 1.35.seconds, curve: Curves.easeOutCubic);
       }
+       */
     });
   }
 

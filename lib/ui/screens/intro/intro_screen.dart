@@ -32,7 +32,8 @@ class _IntroScreenState extends State<IntroScreen> {
 
   void _handleIntroCompletePressed() {
     if (_currentPage.value == pageData.length - 1) {
-      context.go(ScreenPaths.home);
+      //context.go(ScreenPaths.home);
+      context.go(ScreenPaths.login);
       settingsLogic.hasCompletedOnboarding.value = true;
     }
   }

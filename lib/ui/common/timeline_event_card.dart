@@ -21,8 +21,30 @@ class TimelineEventCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('${year.abs()}', style: $styles.text.h3.copyWith(fontWeight: FontWeight.w400, height: 1)),
-                    Text(StringUtils.getYrSuffix(year), style: $styles.text.bodySmall),
+                    Container(
+                      //width: 256,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Colors.white,
+                          width: 1.0,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.5),
+                            blurRadius: 5.0,
+                          ),
+                        ],
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/ailawyer/lawyer1.jpg'),
+                          fit: BoxFit.cover,
+                          alignment: Alignment.center,
+                        ),
+                      ),
+                    ),
+                    //Text('${year.abs()}', style: $styles.text.h3.copyWith(fontWeight: FontWeight.w400, height: 1)),
+                    //Text(StringUtils.getYrSuffix(year), style: $styles.text.bodySmall),
                   ],
                 ),
               ),

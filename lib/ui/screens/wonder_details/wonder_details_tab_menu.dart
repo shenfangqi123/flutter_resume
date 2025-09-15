@@ -34,7 +34,7 @@ class WonderDetailsTabMenu extends StatelessWidget {
         ),
         // Buttons
         Padding(
-          padding: EdgeInsets.only(left: $styles.insets.sm, right: $styles.insets.xxs, bottom: bottomPadding),
+          padding: EdgeInsets.only(left: 0, right: $styles.insets.xxs, bottom: bottomPadding),
           // TabButtons are a Stack with a row of icon buttons, and an illustrated home button sitting on top.
           // The home buttons shows / hides itself based on `showHomeBtn`
           // The row contains an animated placeholder gap which makes room for the icon as it transitions in.
@@ -48,20 +48,47 @@ class WonderDetailsTabMenu extends StatelessWidget {
                   AnimatedContainer(
                     curve: Curves.easeOut,
                     duration: $styles.times.fast,
-                    width: showHomeBtn ? homeBtnSize : 0,
                     height: 0,
                   ),
                   _TabBtn(0, tabController,
                       iconImg: 'editorial', label: $strings.wonderDetailsTabLabelInformation, color: iconColor),
                   _TabBtn(1, tabController,
                       iconImg: 'photos', label: $strings.wonderDetailsTabLabelImages, color: iconColor),
-                  _TabBtn(2, tabController,
-                      iconImg: 'artifacts', label: $strings.wonderDetailsTabLabelArtifacts, color: iconColor),
+
+                  // Home btn
+                  TweenAnimationBuilder<double>(
+                    duration: $styles.times.fast,
+                    tween: Tween(begin: 0, end: showHomeBtn ? 1 : 0),
+                    child: _WonderHomeBtn(
+                      size: homeBtnSize,
+                      wonderType: wonderType,
+                      borderSize: showBg ? 6 : 2,
+                    ),
+                    builder: (_, value, child) {
+                      final curvedValue = Curves.easeOut.transform(value);
+                      return Transform.scale(
+                        scale: .5 + .5 * curvedValue,
+                        child: Transform.translate(
+                          offset: Offset(0, 100 * (1 - curvedValue)),
+                          child: AnimatedOpacity(
+                            opacity: showHomeBtn ? 1 : 0,
+                            duration: $styles.times.fast,
+                            child: child!,
+                          ),
+                        ),
+                      );
+                    },
+                    // Wonder Button
+                  ),
+
                   _TabBtn(3, tabController,
+                      iconImg: 'artifacts', label: $strings.wonderDetailsTabLabelArtifacts, color: iconColor),
+                  _TabBtn(2, tabController,
                       iconImg: 'timeline', label: $strings.wonderDetailsTabLabelEvents, color: iconColor),
                 ],
               ),
 
+              /*
               // Home btn
               TweenAnimationBuilder<double>(
                 duration: $styles.times.fast,
@@ -87,6 +114,11 @@ class WonderDetailsTabMenu extends StatelessWidget {
                 },
                 // Wonder Button
               ),
+
+               */
+
+
+
             ],
           ),
         ),

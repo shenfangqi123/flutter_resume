@@ -32,6 +32,7 @@ class AppBtn extends StatelessWidget {
     this.padding,
     this.expand = false,
     this.isSecondary = false,
+    this.circular = false,
     this.minimumSize,
     this.bgColor,
     this.border,
@@ -40,7 +41,6 @@ class AppBtn extends StatelessWidget {
     IconData? icon,
     double? iconSize,
   })  : child = null,
-        circular = false,
         super(key: key) {
     if (semanticLabel == null && text == null) throw ('AppBtn.from must include either text or semanticLabel');
     this.semanticLabel = semanticLabel ?? text ?? '';

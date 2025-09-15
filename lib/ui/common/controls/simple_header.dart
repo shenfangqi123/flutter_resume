@@ -21,6 +21,7 @@ class SimpleHeader extends StatelessWidget {
           if (showBackBtn) BackBtn(onPressed: onBack).safe(),
           Flexible(
             fit: FlexFit.tight,
+
             child: MergeSemantics(
               child: Semantics(
                 header: true,
@@ -43,6 +44,8 @@ class SimpleHeader extends StatelessWidget {
                 ),
               ),
             ),
+
+
           ),
           if (showBackBtn) Container(width: $styles.insets.lg * 2, alignment: Alignment.centerLeft, child: child),
         ]),

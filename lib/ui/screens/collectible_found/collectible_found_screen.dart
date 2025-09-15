@@ -40,7 +40,8 @@ class CollectibleFoundScreen extends StatelessWidget {
               fit: BoxFit.contain,
             ),
           ),
-        ).animate().scale(begin: 1.5, end: 3, curve: Curves.easeInExpo, delay: t, duration: t * 3).fadeOut(),
+        ).animate()
+            //.scale(begin: 1.5, end: 3, curve: Curves.easeInExpo, delay: t, duration: t * 3).fadeOut(),
       )
     ]);
   }
@@ -114,15 +115,15 @@ class CollectibleFoundScreen extends StatelessWidget {
             ]),
             child: child,
           ),
-        )
-        .scale(begin: 0.3, duration: t * 2, curve: Curves.easeOutExpo, alignment: Alignment(0, 0.7));
+        );
+        //.scale(begin: 0.3, duration: t * 2, curve: Curves.easeOutExpo, alignment: Alignment(0, 0.7));
   }
 
   Widget _buildRibbon(BuildContext context) {
     Duration t = $styles.times.fast;
     return _AnimatedRibbon($strings.collectibleFoundTitleArtifactDiscovered.toUpperCase())
-        .animate()
-        .scale(begin: 0.3, duration: t * 2, curve: Curves.easeOutExpo, alignment: Alignment(0, -1));
+        .animate();
+        //.scale(begin: 0.3, duration: t * 2, curve: Curves.easeOutExpo, alignment: Alignment(0, -1));
   }
 
   Widget _buildTitle(BuildContext context, String text, TextStyle style, Color color, Duration delay) {

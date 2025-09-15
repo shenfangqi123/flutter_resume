@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide ModalBottomSheetRoute;
 
 /// Easily add visual decorations to a scrolling widget based on the state of its controller.
 class ScrollDecorator extends StatefulWidget {

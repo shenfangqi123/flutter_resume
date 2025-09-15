@@ -51,7 +51,7 @@ class _TitleText extends StatelessWidget {
                     builder: (_, __) {
                       final yPos = ContextUtils.getGlobalPos(context)?.dy ?? 0;
                       bool enableHero = yPos > -100;
-                      return WonderTitleText(data, enableHero: enableHero);
+                      return WonderTitleText("ttt6", enableHero: enableHero);
                     }),
               ),
               Gap($styles.insets.xs),
@@ -83,7 +83,7 @@ class _TitleText extends StatelessWidget {
               /// Date
               Text(
                 StringUtils.supplant(
-                  $strings.titleLabelDate,
+                  $strings.titleLabelDate.toString(),
                   {
                     '{fromDate}': StringUtils.formatYr(data.startYr),
                     '{endDate}': StringUtils.formatYr(data.endYr),

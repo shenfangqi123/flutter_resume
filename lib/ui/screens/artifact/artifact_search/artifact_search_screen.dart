@@ -58,6 +58,8 @@ class _ArtifactSearchScreenState extends State<ArtifactSearchScreen> with GetItS
   }
 
   void _search() {
+    print("t1: $WonderType.colosseum");
+
     if (_query.isEmpty) {
       _searchResults = wonder.searchData;
     } else {
@@ -145,7 +147,7 @@ class _ArtifactSearchScreenState extends State<ArtifactSearchScreen> with GetItS
           Gap($styles.insets.sm),
           Text(
             StringUtils.supplant(
-              $strings.artifactsSearchLabelFound,
+              $strings.artifactsSearchLabelFound.toString(),
               {
                 '{numFound}': _searchResults.length.toString(),
                 '{numResults}': _filteredResults.length.toString(),

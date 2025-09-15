@@ -9,4 +9,5 @@ class UnsplashLogic {
 
   List<String>? getCollectionPhotos(String collectionId) => _idsByCollection[collectionId];
 
+  Future<List<String>?> getResumeCollectionPhotos() => service.loadResumeSplashInfo();
 }

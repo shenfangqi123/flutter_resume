@@ -110,7 +110,7 @@ class _WallpaperPhotoScreenState extends State<WallpaperPhotoScreen> {
               BottomCenter(
                 child: Transform.translate(
                   offset: Offset(0.0, -$styles.insets.xl * 2),
-                  child: WonderTitleText(wonderData, enableShadows: true),
+                  child: WonderTitleText("ttt2", enableShadows: true),
                 ),
               ),
           ],

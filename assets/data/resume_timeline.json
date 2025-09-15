@@ -1,0 +1,51 @@
+{
+  "anshex": {
+    "type": 0,
+    "title": "AnsheXに入社しました。",
+    "startYr": 2010,
+    "endYr": 2011
+  },
+  "changjiang": {
+    "type": 0,
+    "title": "長江証券に入社しました。",
+    "startYr": 2000,
+    "endYr": 2002
+  },
+  "cmn": {
+    "type": 0,
+    "title": "CMNに入社しました。",
+    "startYr": 2017,
+    "endYr": 2018
+  },
+  "kaisei": {
+    "type": 0,
+    "title": "株式会社開成に入社しました。",
+    "startYr": 2020,
+    "endYr": 2023
+  },
+  "raytec": {
+    "type": 0,
+    "title": "株式会社Raytecに入社しました。",
+    "startYr": 2002,
+    "endYr": 2009
+  },
+  "self": {
+    "type": 0,
+    "title": "Wechatミニゲームを中心として開発を開始しました。",
+    "startYr": 2018,
+    "endYr": 2020
+  },
+  "weic1": {
+    "type": 0,
+    "title": "WEICに入社しました。",
+    "startYr": 2011,
+    "endYr": 2012
+  },
+  "weic2": {
+    "type": 0,
+    "title": "WEIC事業を開始しました。",
+    "startYr": 2012,
+    "endYr": 2017
+  }
+
+}

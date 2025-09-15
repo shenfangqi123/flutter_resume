@@ -15,7 +15,7 @@ class UnsplashPhoto extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         AppImage(
-          image: NetworkImage(UnsplashPhotoData.getSelfHostedUrl(id, size)),
+          image: NetworkImage(UnsplashPhotoData.getSplashHostedUrl(id, size)),
           fit: fit,
           progress: true,
           scale: 1,

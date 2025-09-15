@@ -32,6 +32,11 @@ class UnsplashPhotoData {
     return 'https://wonderous.info/unsplash/$id-$size.jpg';
   }
 
+  static String getSplashHostedUrl(String id, UnsplashPhotoSize targetSize) {
+    final String baseImagePath = 'https://resume-flutter.s3.ap-northeast-1.amazonaws.com/unsplash_data/';
+    return '$baseImagePath$id.jpeg';
+  }
+
   /// List of image ids by collection. This can be generated with the [UnsplashDownloadService].generateUnsplashCollectionsClass().
   static final photosByCollectionId = {
     'SUK0tuMnLLw': [

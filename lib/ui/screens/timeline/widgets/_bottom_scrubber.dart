@@ -2,12 +2,11 @@ part of '../timeline_screen.dart';
 
 class _BottomScrubber extends StatelessWidget {
   const _BottomScrubber(this.scroller,
-      {Key? key, required this.timelineMinSize, required this.size, required this.selectedWonder})
+      {Key? key, required this.timelineMinSize, required this.size})
       : super(key: key);
   final ScrollController? scroller;
   final double timelineMinSize;
   final double size;
-  final WonderType? selectedWonder;
 
   /// Calculate what fraction the scroller has travelled
   double _calculateScrollFraction(ScrollPosition? pos) {
@@ -37,7 +36,6 @@ class _BottomScrubber extends StatelessWidget {
     }
 
     /// Create a list for the timeline builder to indicate the selected wonder
-    final wonder = selectedWonder;
     return SizedBox(
       height: size,
       child: Stack(
@@ -48,7 +46,6 @@ class _BottomScrubber extends StatelessWidget {
             child: WondersTimelineBuilder(
               crossAxisGap: 4,
               selectedWonders: [
-                if (wonder != null) ...[wonder]
               ],
             ),
           ),

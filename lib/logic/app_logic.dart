@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:wonders/common_libs.dart';
 import 'package:wonders/ui/common/utils/page_routes.dart';
+import 'package:wonders/ui/screens/home/wonders_home_screen.dart';
 
 class AppLogic {
   /// Indicates to the rest of the app that bootstrap has not completed.
@@ -36,6 +37,9 @@ class AppLogic {
     // Wonders Data
     wondersLogic.init();
 
+    // Resume Data
+    await resumeLogic.init();
+
     // Events
     timelineLogic.init();
 
@@ -48,9 +52,12 @@ class AppLogic {
     // Load initial view (replace empty initial view which is covered by a native splash screen)
     bool showIntro = settingsLogic.hasCompletedOnboarding.value == false;
     if (showIntro) {
-      appRouter.go(ScreenPaths.intro);
+      //appRouter.go(ScreenPaths.intro);
+      appRouter.go(ScreenPaths.login);
+      //appRouter.go(ScreenPaths.home);
     } else {
-      appRouter.go(ScreenPaths.home);
+      appRouter.go(ScreenPaths.login);
+      //appRouter.go(ScreenPaths.home);
     }
   }
 
@@ -78,6 +85,12 @@ class AppLogic {
   Future<T?> showFullscreenDialogRoute<T>(BuildContext context, Widget child) async {
     return await Navigator.of(context).push<T>(
       PageRoutes.dialog<T>(child, $styles.times.pageTransition),
+    );
+  }
+
+  Future<T?> showHalfscreenDialogRoute<T>(BuildContext context, Widget child) async {
+    return await Navigator.of(context).push<T>(
+      PageRoutes.dialogHalf<T>(child, $styles.times.pageTransition),
     );
   }
 }

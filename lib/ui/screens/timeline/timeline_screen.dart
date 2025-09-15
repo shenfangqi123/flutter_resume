@@ -6,6 +6,7 @@ import 'package:wonders/logic/common/debouncer.dart';
 import 'package:wonders/logic/common/string_utils.dart';
 import 'package:wonders/logic/data/timeline_data.dart';
 import 'package:wonders/logic/data/wonder_data.dart';
+import 'package:wonders/logic/data/resume_data.dart';
 import 'package:wonders/ui/common/blend_mask.dart';
 import 'package:wonders/ui/common/controls/simple_header.dart';
 import 'package:wonders/ui/common/dashed_line.dart';
@@ -24,9 +25,7 @@ part 'widgets/_timeline_section.dart';
 part 'widgets/_year_markers.dart';
 
 class TimelineScreen extends StatefulWidget {
-  final WonderType? type;
-
-  const TimelineScreen({Key? key, required this.type}) : super(key: key);
+  const TimelineScreen({Key? key}) : super(key: key);
 
   @override
   State<TimelineScreen> createState() => _TimelineScreenState();
@@ -41,8 +40,11 @@ class _TimelineScreenState extends State<TimelineScreen> {
     return LayoutBuilder(builder: (_, constraints) {
       // Determine min and max size of the timeline based on the size available to this widget
       const double scrubberSize = 70;
-      const double minSize = 1200;
-      const double maxSize = 5500;
+      //const double minSize = 1200;
+      //const double maxSize = 5500;
+      const double minSize = 200;
+      const double maxSize = 2750;
+
       return Container(
         color: $styles.colors.black,
         child: Padding(
@@ -59,21 +61,21 @@ class _TimelineScreenState extends State<TimelineScreen> {
                     _ScrollingViewport(
                       scroller: _scroller,
                       minSize: minSize,
-                      maxSize: maxSize,
-                      selectedWonder: widget.type,
+                      maxSize: maxSize
                     ),
                   ],
                 ),
               ),
+
 
               /// Mini Horizontal timeline, reacts to the state of the larger scrolling timeline,
               /// and changes the timelines scroll position on Hz drag
               _BottomScrubber(
                 _scroller,
                 size: scrubberSize,
-                timelineMinSize: minSize,
-                selectedWonder: widget.type,
+                timelineMinSize: minSize
               ),
+
               Gap($styles.insets.lg),
             ],
           ),

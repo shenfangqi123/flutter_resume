@@ -178,6 +178,7 @@ class _ArtifactSearchHelperState extends State<ArtifactSearchHelper> {
     SearchData entry = SearchData(
       year,
       id,
+      'image',
       _escape(json['title']),
       _getKeywords(json),
       imagePath,

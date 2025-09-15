@@ -7,13 +7,25 @@ class TimelineLogic {
 
   void init() {
     // Create an event for each wonder, and merge it with the list of GlobalEvents
+/*
     events = [
       ...GlobalEventsData().globalEvents,
       ...wondersLogic.all.map(
         (w) => TimelineEvent(
           w.startYr,
-          StringUtils.supplant($strings.timelineLabelConstruction, {'{title}': w.title}),
+          StringUtils.supplant($strings.timelineLabelConstruction.toString(), {'{title}': w.title}),
         ),
+      )
+    ];
+ */
+
+    events = [
+      ...GlobalEventsData().globalEvents,
+      ...resumeLogic.all.map(
+            (w) => TimelineEvent(
+              w.startYr,
+              $strings.timelineLabelConstruction(w.title),
+            ),
       )
     ];
   }
