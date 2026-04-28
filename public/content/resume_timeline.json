@@ -1,0 +1,38 @@
+{
+  "changjiang": {
+    "type": 0,
+    "title": "長江証券に入社しました。",
+    "startYr": 2001,
+    "endYr": 2002
+  },
+  "raytec": {
+    "type": 0,
+    "title": "株式会社Raytecに入社しました。",
+    "startYr": 2003,
+    "endYr": 2010
+  },
+  "weic1": {
+    "type": 1,
+    "title": "WEICに入社しました。",
+    "startYr": 2011,
+    "endYr": 2012
+  },
+  "weic2": {
+    "type": 0,
+    "title": "WEIC事業を開始しました。",
+    "startYr": 2013,
+    "endYr": 2019
+  },
+  "kaisei": {
+    "type": 1,
+    "title": "株式会社開成に入社しました。",
+    "startYr": 2020,
+    "endYr": 2023
+  },
+  "crico": {
+    "type": 1,
+    "title": "Crico会社に入社しました。",
+    "startYr": 2024,
+    "endYr": 2025
+  }
+}

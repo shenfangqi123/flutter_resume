@@ -1,5 +1,6 @@
 import 'package:wonders/_tools/unsplash_download_service.dart';
 import 'package:wonders/logic/common/platform_info.dart';
+import 'package:wonders/logic/config.dart';
 
 enum UnsplashPhotoSize { med, large, xl }
 
@@ -33,8 +34,12 @@ class UnsplashPhotoData {
   }
 
   static String getSplashHostedUrl(String id, UnsplashPhotoSize targetSize) {
-    final String baseImagePath = 'https://resume-flutter.s3.ap-northeast-1.amazonaws.com/unsplash_data/';
-    return '$baseImagePath$id.jpeg';
+    const String base = UploadConfig.remoteBaseUrl;
+    if (id.contains('/')) {
+      final normalized = id.startsWith('/') ? id.substring(1) : id;
+      return '$base$normalized';
+    }
+    return '${base}public/photos/$id.png';
   }
 
   /// List of image ids by collection. This can be generated with the [UnsplashDownloadService].generateUnsplashCollectionsClass().
